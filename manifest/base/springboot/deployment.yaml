@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-petclinic
+  namespace: default
+  labels:
+    app: spring-petclinic
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  replicas: 3
+  selector:
+    matchLabels:
+      app: spring-petclinic
+  template:
+    metadata:
+      labels:
+        app: spring-petclinic
+    spec:
+      # UID 지정
+      securityContext:
+        runAsUser: 1000
+      containers:
+      # 소스 빌드 후 JAR 구동 컨테이너 이미지
+      - image: app:1.0.1
+        name: spring-petclinic
+        ports:
+        - containerPort: 8080
+        # host volume 마운트
+        volumeMounts:
+        - name: logs-volume
+          mountPath: /var/log
+        # 정상 동작 여부를 반환하는 api를 체크
+        # 10초에 한번 체크, 3회 연속 실패시 재시작
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+      # 로컬 volume 지정
+      volumes:
+        - name: logs-volume
+          hostPath:
+            path: /var/log
+            type: Directory
+      # 종료 시 30초 이내에 프로세스가 종료되지 않으면 SIGKILL로 강제 종료
+      terminationGracePeriodSeconds: 30
