@@ -92,7 +92,7 @@ kustomize build manifest/overlays/prod | kubectl -n default apply -f -
 
 ### Delete k8s
 ```bash
-kustomize build /manifest/overlays/prod | kubectl -n default delete -f -
+kustomize build manifest/overlays/prod | kubectl -n default delete -f -
 ```
 
 # issue 정리
