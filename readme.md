@@ -12,7 +12,7 @@
     - 배포시 Endpoint에 대한 중단 없이 scale in/out 가능하도록 구성
     - strategy 설정을 통해 롤링 업데이트 적용
 - 어플리케이션 프로세스는 root 계정이 아닌 uid:1000으로 실행
-- DB 환경 PV, PVC 구성 데이터 유지
+- Database vloume을 PV, PVC 구성하여 DB데이터 유지
 - 어플리케이션과 DB는 cluster domain으로 통신
 - docker 이미지를 만들고 k8s에서 application 이미지로 사용
 
