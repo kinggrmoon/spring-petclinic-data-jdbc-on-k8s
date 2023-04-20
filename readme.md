@@ -6,7 +6,7 @@
 - maven으로 진행되는 Build를 gradle로 전환
 - k8s에서 구동이 가능하도록 manifest(yaml)를 작성
 - 어플리케이션의 log는 host의 /logs 디렉토리에 적재
-- health 체크 api 코드 하여 pod상태 체크(10s마다 체크, 3회 연속 실패시 교체)
+- health 체크 api 코드를 추가하여 pod상태 체크(10s마다 체크, 3회 연속 실패시 교체)
 - 종료 시 30초 이내에 프로세스가 종료되지 않으면 SIGKILL로 강제 종료
 - ingress(nginx-ingress-controller) -> service -> pod 로 app구성
     - 배포시 Endpoint에 대한 중단 없이 scale in/out 가능하도록 구성
