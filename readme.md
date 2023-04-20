@@ -96,7 +96,7 @@ kustomize build manifest/overlays/prod | kubectl -n default delete -f -
 ```
 
 # issue 정리
-- Gradle 빌드시 wro4j를 통한 CSS가 소스에 반영되지 못함
+- Gradle 빌드시 wro4j를 통한 생성되는 CSS가 반영되지 못함
     - maven build를 통해 만들어진 CSS로 사이트 오픈 진행
     - wro4j -> webpack 전환 필요
 
